@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+@author Daniel Beacham
+@date January 8, 2013
+@title Digital Jukebox - Add an Item
+
+
+-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Digital Jukebox - Add an Item</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+        fieldset {
+            width: 450px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+<fieldset>
+    <legend>Add New Playlist</legend>
+    <form method="post" action="#" enctype="multipart/form-data">
+        <ul>
+            <li>
+                <label for="playlist_name">Name of Playlist:</label>
+                <input type="text" name="playlist_name" />
+            </li>
+            <li>
+                <label for="playlist_description">Description:</label>
+                <textarea name="playlist_description"></textarea>
+            </li>
+            <li>
+                <label for="playlist_genre">Primary Genre:</label>
+                <select name="playlist_genre">
+                    <option value="null" selected>Please Choose one:</option>
+                    <option value="country">Country</option>
+                    <option value="rap">Rap/Hip-Hop</option>
+                    <option value="electronica">Electronica</option>
+                    <option value="dubstep">Dubstep</option>
+                </select>
+            </li>
+            <li>
+                <label for="playlist_date">Date Added:</label>
+                <input type="date" name="playlist_date" />
+            </li>
+            <li>
+                <label for="playlist_priority">Priority:</label>
+                <input type="range" name="playlist_priority" />
+            </li>
+            <li>
+                Enabled
+                <ul>
+                    <li><input type="radio" name="playlist_enabled" value="1"><span>Enabled</span></li>
+                    <li><input type="radio" name="playlist_enabled" value="0"><span>Disabled</span></li>
+                </ul>
+            </li>
+        </ul>
+        <input type="hidden" name="user_id" value="xxxxxxxx" />
+        <input type="submit" value="Submit" />
+        <p><a href="#">Clear All</a> | <a href="#">Display All</a></p>
+    </form>
+</fieldset>
+</body>
+</html>
