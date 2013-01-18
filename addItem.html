@@ -18,60 +18,67 @@
     </head>
     <body>
     <div id="wrapper">
+        <div id="add_playlist">
         <h1>Add New Playlist</h1>
-        <fieldset>
-            <legend>So you wanna add a new playlist...</legend>
-            <form method="post" action="#" enctype="multipart/form-data" onsubmit="return saveFormData(this);">
-                <ul>
-                    <li>
-                        <label for="playlist_name">Name of Playlist:</label>
-                        <input type="text" name="playlist_name" id="playlist_name" />
-                    </li>
-                    <li>
-                        <label for="playlist_description">Description:</label>
-                        <textarea name="playlist_description" id="playlist_description"></textarea>
-                    </li>
-                    <li>
-                        <label for="playlist_genre">Primary Genre:</label>
-                        <select name="playlist_genre" id="playlist_genre">
-                            <option value="null" selected>Please Choose one:</option>
-                            <option value="country">Country</option>
-                            <option value="rap">Rap/Hip-Hop</option>
-                            <option value="electronica">Electronica</option>
-                            <option value="dubstep">Dubstep</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for="playlist_date">Date Added:</label>
-                        <input type="date" name="playlist_date" id="playlist_date" />
-                    </li>
-                    <li>
-                        <label for="playlist_priority">Priority:</label>
-                        <input type="range" name="playlist_priority" id="playlist_priority" />
-                    </li>
-                    <li>
-                        Activate Playlist:
-                        <ul>
-                            <li>
-                                <label for="playlist_enabled">
-                                    <input type="radio" name="playlist_enabled" id="playlist_enabled" value="1" />
-                                    Active
-                                </label>
-                            </li>
-                            <li>
-                                <label for="playlist_disabled">
-                                    <input type="radio" name="playlist_enabled" id="playlist_disabled" value="0" />
-                                    Disabled
-                                </label>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <input type="hidden" name="user_id" id="user_id" value="xxxxxxxx" />
-                <input type="submit" value="Add Playlist" />
-                <p><a href="#">Clear All</a> | <a href="#">Display All</a></p>
-            </form>
-        </fieldset>
+            <fieldset>
+                <legend>So you wanna add a new playlist...</legend>
+                <div id="confirmation_error"></div>
+                <form method="post" action="#" enctype="multipart/form-data" onsubmit="return saveFormData(this);">
+                    <ul>
+                        <li>
+                            <label for="playlist_name">Name of Playlist:</label>
+                            <input type="text" name="playlist_name" id="playlist_name" />
+                        </li>
+                        <li>
+                            <label for="playlist_description">Description:</label>
+                            <textarea name="playlist_description" id="playlist_description"></textarea>
+                        </li>
+                        <li>
+                            <label for="playlist_genre">Primary Genre:</label>
+                            <select name="playlist_genre" id="playlist_genre">
+                            </select>
+                        </li>
+                        <li>
+                            <label for="playlist_date">Date Added:</label>
+                            <input type="date" name="playlist_date" id="playlist_date" />
+                        </li>
+                        <li>
+                            <label for="playlist_priority">Priority:</label>
+                            <input type="range" name="playlist_priority" id="playlist_priority" />
+                        </li>
+                        <li>
+                            Activate Playlist:
+                            <ul>
+                                <li>
+                                    <label for="playlist_enabled">
+                                        <input type="radio" name="playlist_enabled" id="playlist_enabled" value="1" />
+                                        Active
+                                    </label>
+                                </li>
+                                <li>
+                                    <label for="playlist_disabled">
+                                        <input type="radio" name="playlist_enabled" id="playlist_disabled" value="0" />
+                                        Disabled
+                                    </label>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <input type="hidden" name="user_id" id="user_id" value="xxxxxxxx" />
+                    <input type="submit" value="Add Playlist" />
+
+                    <input type="button" value="Home" id="home_button" />
+                    <input type="button" value="Clear All" id="clear_data" />
+                    <input type="button" value="Display All" id="display_data" />
+
+                </form>
+            </fieldset>
+        </div>
+        <div id="display_playlists">
+            <h1>Existing Playlists</h1>
+            <div id="existing_data"></div>
+            <input type="button" value="&lt; Back" id="add_new_playlist" />
+        </div>
     </div>
     <script src="_js/main.js"></script>
 </body>
