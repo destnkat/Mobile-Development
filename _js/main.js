@@ -1,5 +1,5 @@
 
-    function saveFormData(frm) {
+    function saveFormData() {
 
         var savedItems = {},
             itemsArray = ['playlist_name', 'playlist_description', 'playlist_genre', 'playlist_date', 'playlist_priority', 'user_id'],
@@ -15,6 +15,9 @@
         consolidated = JSON.stringify(savedItems);
 
         localStorage.setItem(playlistId, consolidated);
+        var conf = document.getElementById('confirmation_error');
+        conf.style.display = 'block';
+        conf.innerHTML = '<p>Your Playlist has been successfully saved!</p>';
 
         return false;  // Don't submit the Form through the PHP
     }
@@ -22,9 +25,15 @@
     function validateTheForm(frm) {
         var error = false;
         var conf = document.getElementById('confirmation_error');
+        var arr = ['lbl_name', 'lbl_description', 'lbl_genre'];
         var errors = [];
 
-       
+
+        for (var i= 0; i < arr.length; i++) {
+            var tmplbl = document.getElementById(arr[i]);
+            removeClass(tmplbl, 'hasError');
+        }
+
         conf.style.display = 'block';
 
         //Clear the Error DIV
@@ -45,7 +54,7 @@
             errors.push('lbl_genre');
         }
 
-        if(error) {
+        if (error) {
             conf.innerHTML = '<p>There are issues with your submission. Please see the highlighted fields and' +
                 ' make the necessary updates</p>';
 
@@ -55,8 +64,14 @@
                 var tmpLbl = document.getElementById(errors[i]);
                 addClass(tmpLbl, 'hasError');
             }
+
+
+        } else {
+            saveFormData();
         }
+
         return false;
+
 
     }
 
@@ -96,7 +111,10 @@
             output += "<p><strong>Genre: </strong>" + value.playlist_genre + "</p>";
             output += "<p><strong>Created: </strong>" + value.playlist_date + "</p>";
             output += "<p><strong>Priority: </strong>" + value.playlist_priority + "</p>";
-            output += "<p><strong>Status: </strong>" + enabled + "</p><hr/>";
+            output += "<p><strong>Status: </strong>" + enabled + "</p>";
+            output += "<input type='button' value='edit playlist' onclick='editLocalStorageItem(this.id);' id='edit_" + key + "' />";
+            output += "<input type='button' value='delete playlist' onclick='deleteLocalStorageItem(this.id);' id='delete_" + key + "' />  <hr/>";
+
 
         }
 
@@ -161,6 +179,27 @@
         if (hasClass(el, name)) {
             el.className=el.className.replace(new RegExp('(\\s|^)'+name+'(\\s|$)'),' ').replace(/^\s+|\s+$/g, '');
         }
+    }
+
+    function deleteLocalStorageItem(id) {
+        var delim = id.indexOf('_');
+        var cleanId = id.substring(delim + 1, id.length);
+        localStorage.removeItem(cleanId);
+
+        displayFormData();
+    }
+
+    function editLocalStorageItem(id) {
+        var delim = id.indexOf('_');
+        var cleanId = id.substring(delim + 1, id.length);
+        var retrieveItem = localStorage.getItem(cleanId);
+
+        var addWrapper = document.getElementById('add_playlist');
+        var displayWrapper = document.getElementById('display_playlists');
+
+        addWrapper.style.display = "block";
+        displayWrapper.style.display = "none";
+
     }
 
 function init() {
