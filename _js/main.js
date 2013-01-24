@@ -2,22 +2,32 @@
     function saveFormData() {
 
         var savedItems = {},
-            itemsArray = ['playlist_name', 'playlist_description', 'playlist_genre', 'playlist_date', 'playlist_priority', 'user_id'],
+            itemsArray = ['playlist_name', 'playlist_description', 'playlist_genre', 'playlist_date', 'playlist_priority'],
             playlistId = getRandomPlaylistId(),
-            consolidated;
+            consolidated,
+            addEdit = document.getElementById('add_edit').value,
+            confirmationMsg = '<p>Your Playlist has been successfully saved!</p>';
 
         for(var i = 0; i < itemsArray.length; i++ ) {
             var key = itemsArray[i];
             savedItems[key] = document.getElementById(key).value;
         }
 
+
+        if (addEdit.indexOf('edit') !== -1) {
+            var tmp = addEdit.indexOf('_');
+            playlistId = addEdit.substr(tmp + 1, addEdit.length);
+            confirmationMsg = '<p>Your Playlist has been edited successfully!</p>'
+        }
+
         savedItems['enabled'] = checkEnabledStatus();
         consolidated = JSON.stringify(savedItems);
+
 
         localStorage.setItem(playlistId, consolidated);
         var conf = document.getElementById('confirmation_error');
         conf.style.display = 'block';
-        conf.innerHTML = '<p>Your Playlist has been successfully saved!</p>';
+        conf.innerHTML = confirmationMsg;
 
         return false;  // Don't submit the Form through the PHP
     }
@@ -27,6 +37,7 @@
         var conf = document.getElementById('confirmation_error');
         var arr = ['lbl_name', 'lbl_description', 'lbl_genre'];
         var errors = [];
+        conf.innerHTML = '';
 
 
         for (var i= 0; i < arr.length; i++) {
@@ -93,8 +104,11 @@
         var addWrapper = document.getElementById('add_playlist');
         var displayWrapper = document.getElementById('display_playlists');
         var existingData = document.getElementById('existing_data');
+        var conf = document.getElementById('confirmation_error');
         var output = '';
 
+        conf.innerHTML = '';
+        conf.style.display = 'none';
         addWrapper.style.display = "none";
         displayWrapper.style.display = "block";
 
@@ -192,13 +206,38 @@
     function editLocalStorageItem(id) {
         var delim = id.indexOf('_');
         var cleanId = id.substring(delim + 1, id.length);
-        var retrieveItem = localStorage.getItem(cleanId);
+        var retrieveItem = JSON.parse(localStorage.getItem(cleanId));
 
         var addWrapper = document.getElementById('add_playlist');
         var displayWrapper = document.getElementById('display_playlists');
 
         addWrapper.style.display = "block";
         displayWrapper.style.display = "none";
+        var name = document.getElementById('playlist_name');
+        var description = document.getElementById('playlist_description');
+        var genre = document.getElementById('playlist_genre');
+        var date = document.getElementById('playlist_date');
+        var priority = document.getElementById('playlist_priority');
+        var addEdit = document.getElementById('add_edit');
+
+        name.value = retrieveItem.playlist_name;
+        description.value = retrieveItem.playlist_description;
+        date.value = retrieveItem.playlist_date;
+        priority.value = retrieveItem.playlist_priority;
+
+        if(retrieveItem.enabled == '1') {
+            document.getElementById('playlist_enabled').checked = true;
+        } else {
+            document.getElementById('playlist_disabled').checked = true;
+        }
+
+        for(var i=0; i < genre.length; i++) {
+            if(genre[i].value === retrieveItem.playlist_genre) {
+                genre[i].selected = true;
+            }
+        }
+        document.getElementById('btn_submit').value = 'Edit Playlist';
+        addEdit.value = 'edit_' + cleanId;
 
     }
 
