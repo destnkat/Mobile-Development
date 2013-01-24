@@ -23,18 +23,18 @@
             <fieldset>
                 <legend>So you wanna add a new playlist...</legend>
                 <div id="confirmation_error"></div>
-                <form method="post" action="#" enctype="multipart/form-data" onsubmit="return saveFormData(this);">
+                <form method="post" action="#" enctype="multipart/form-data" onsubmit="return validateTheForm(this);">
                     <ul>
                         <li>
-                            <label for="playlist_name">Name of Playlist:</label>
+                            <label for="playlist_name" id="lbl_name"><span class="asterisk">*</span>Name of Playlist:</label>
                             <input type="text" name="playlist_name" id="playlist_name" />
                         </li>
                         <li>
-                            <label for="playlist_description">Description:</label>
+                            <label for="playlist_description" id="lbl_description"><span class="asterisk">*</span>Description:</label>
                             <textarea name="playlist_description" id="playlist_description"></textarea>
                         </li>
                         <li>
-                            <label for="playlist_genre">Primary Genre:</label>
+                            <label for="playlist_genre" id="lbl_genre"><span class="asterisk">*</span>Primary Genre:</label>
                             <select name="playlist_genre" id="playlist_genre">
                             </select>
                         </li>
@@ -51,7 +51,7 @@
                             <ul>
                                 <li>
                                     <label for="playlist_enabled">
-                                        <input type="radio" name="playlist_enabled" id="playlist_enabled" value="1" />
+                                        <input type="radio" name="playlist_enabled" id="playlist_enabled" checked value="1" />
                                         Active
                                     </label>
                                 </li>
@@ -64,6 +64,7 @@
                             </ul>
                         </li>
                     </ul>
+                    <p><small><span class="asterisk">*</span> denotes a required field</small></p>
                     <input type="hidden" name="user_id" id="user_id" value="xxxxxxxx" />
                     <input type="submit" value="Add Playlist" />
 

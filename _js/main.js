@@ -1,11 +1,10 @@
 
     function saveFormData(frm) {
-     
+
         var savedItems = {},
             itemsArray = ['playlist_name', 'playlist_description', 'playlist_genre', 'playlist_date', 'playlist_priority', 'user_id'],
             playlistId = getRandomPlaylistId(),
-            consolidated,
-            dialogBox;
+            consolidated;
 
         for(var i = 0; i < itemsArray.length; i++ ) {
             var key = itemsArray[i];
@@ -18,6 +17,47 @@
         localStorage.setItem(playlistId, consolidated);
 
         return false;  // Don't submit the Form through the PHP
+    }
+
+    function validateTheForm(frm) {
+        var error = false;
+        var conf = document.getElementById('confirmation_error');
+        var errors = [];
+
+       
+        conf.style.display = 'block';
+
+        //Clear the Error DIV
+        conf.innerHTML = '';
+
+        if(frm.playlist_name.value == '') {
+            error = true;
+            errors.push('lbl_name');
+        }
+
+        if (frm.playlist_description.value == '') {
+            error = true;
+            errors.push('lbl_description');
+        }
+
+        if(frm.playlist_genre.value === 'choose one') {
+            error = true;
+            errors.push('lbl_genre');
+        }
+
+        if(error) {
+            conf.innerHTML = '<p>There are issues with your submission. Please see the highlighted fields and' +
+                ' make the necessary updates</p>';
+
+            conf.style.display = 'block';
+
+            for(var i=0; i < errors.length; i++) {
+                var tmpLbl = document.getElementById(errors[i]);
+                addClass(tmpLbl, 'hasError');
+            }
+        }
+        return false;
+
     }
 
     function checkEnabledStatus() {
@@ -65,7 +105,7 @@
     }
 
     function populateSelectForm() {
-        var genres = ["country", "rap", "classical", "pop"];
+        var genres = ["choose one","country", "rap", "classical", "pop"];
         var genreSelect = document.getElementById('playlist_genre');
 
         if(genreSelect) {
@@ -104,6 +144,22 @@
             home.addEventListener('click', function(){
                 window.location.href = 'index.html';
             });
+        }
+    }
+
+    function hasClass(el, name) {
+        return new RegExp('(\\s|^)'+name+'(\\s|$)').test(el.className);
+    }
+
+    function addClass(el, name)
+    {
+        if (!hasClass(el, name)) { el.className += (el.className ? ' ' : '') +name; }
+    }
+
+    function removeClass(el, name)
+    {
+        if (hasClass(el, name)) {
+            el.className=el.className.replace(new RegExp('(\\s|^)'+name+'(\\s|$)'),' ').replace(/^\s+|\s+$/g, '');
         }
     }
 
