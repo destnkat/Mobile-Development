@@ -80,3 +80,27 @@ input[type="submit"]:hover {
 label.hasError {
     color: #b73b4c;
 }
+
+.genreIcon {
+    display: block;
+    text-indent: -9999px;
+    background: url(../_images/category_icons.png) no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.genreIcon.country {
+    background-position: 0 0;
+}
+
+.genreIcon.rap {
+    background-position: -21px 0;
+}
+
+.genreIcon.classical {
+    background-position: -21px -21px;
+}
+
+.genreIcon.pop {
+    background-position: 0px -21px;
+}

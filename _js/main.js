@@ -106,20 +106,30 @@
         var existingData = document.getElementById('existing_data');
         var conf = document.getElementById('confirmation_error');
         var output = '';
+        var dummyDataLoaded = false;
 
         conf.innerHTML = '';
         conf.style.display = 'none';
         addWrapper.style.display = "none";
         displayWrapper.style.display = "block";
 
+
         if(localStorage.length == 0 ){
-            output += "<p>No Playlists have been entered</p>";
+            var dummyData = json.playlists;
+            for(var i = 0; i < dummyData.length; i++) {
+                var playlistID = getRandomPlaylistId();
+                var consolidated = JSON.stringify(dummyData[i]);
+                localStorage.setItem(playlistID, consolidated);
+            }
+            dummyDataLoaded = true;
         }
+
         for(var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             var value = JSON.parse(localStorage[key]);
 
             var enabled = value.enabled == "1" ? "Active" : "Inactive";
+            output += "<div class='genreIcon " + value.playlist_genre +"'>" + value.playlist_genre + " ICON</div>";
             output += "<p><strong>Name: </strong> " +value.playlist_name +  "</p>";
             output += "<p><strong>Description: </strong>" + value.playlist_description + "</p>";
             output += "<p><strong>Genre: </strong>" + value.playlist_genre + "</p>";
@@ -133,6 +143,10 @@
         }
 
         existingData.innerHTML = output;
+
+        if(dummyDataLoaded) {
+            alert('Dummy Data Loaded');
+        }
 
     }
 
