@@ -84,9 +84,9 @@ label.hasError {
 .genreIcon {
     display: block;
     text-indent: -9999px;
-    background: url(../_images/category_icons.png) no-repeat;
-    height: 20px;
-    width: 20px;
+    background: url(../_images/genre_icons.png) no-repeat;
+    height: 45px;
+    width: 45px;
 }
 
 .genreIcon.country {
@@ -94,13 +94,13 @@ label.hasError {
 }
 
 .genreIcon.rap {
-    background-position: -21px 0;
+    background-position: -56px 0;
 }
 
-.genreIcon.classical {
-    background-position: -21px -21px;
+.genreIcon.dubstep {
+    background-position: 0px -56px;
 }
 
 .genreIcon.pop {
-    background-position: 0px -21px;
+    background-position: -56px -56px;
 }

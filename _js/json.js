@@ -15,6 +15,22 @@ var json = {
             "playlist_priority" : '73',
             "playlist_date" : '2013-03-20',
             "enabled" : '0'
+        },
+        {
+            "playlist_name" : 'Playlist 3',
+            "playlist_genre" : 'dubstep',
+            "playlist_description" : 'Electronic Hyper Smash',
+            "playlist_priority" : '15',
+            "playlist_date" : '2013-05-20',
+            "enabled" : '1'
+        },
+        {
+            "playlist_name" : 'Playlist 4',
+            "playlist_genre" : 'pop',
+            "playlist_description" : 'Boy Bands, Britney and Christina.. boom',
+            "playlist_priority" : '25',
+            "playlist_date" : '2013-02-20',
+            "enabled" : '0'
         }
     ]
 }

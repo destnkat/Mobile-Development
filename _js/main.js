@@ -151,7 +151,7 @@
     }
 
     function populateSelectForm() {
-        var genres = ["choose one","country", "rap", "classical", "pop"];
+        var genres = ["choose one","country", "rap", "dubstep", "pop"];
         var genreSelect = document.getElementById('playlist_genre');
 
         if(genreSelect) {
